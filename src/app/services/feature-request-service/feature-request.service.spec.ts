@@ -2,21 +2,28 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { FeatureRequestService } from './feature-request.service';
 import { FeatureRequest } from 'src/app/model/feature-request';
-import { of, from, Observable, BehaviorSubject } from 'rxjs';
+import { of, from, Observable, BehaviorSubject, forkJoin } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 
 
 describe('FeatureRequestServiceService', () => {
-  const feat1 = new FeatureRequest(100,"Do most things really well",5,10);
-  const feat2 = new FeatureRequest(200,"Do all things well",5,10);
-  const feat3 = new FeatureRequest(300,"Do all things amazing",5,10);
-  const feat4 = new FeatureRequest(400,"Never ever screw up...EVER",5,10);
-  const requests = [feat1,feat2,feat3,feat4];
+  const feat1 = new FeatureRequest(100, "Do most things really well", 5, 10);
+  const feat2 = new FeatureRequest(200, "Do all things well", 5, 10);
+  const feat3 = new FeatureRequest(300, "Do all things amazing", 5, 10);
+  const feat4 = new FeatureRequest(400, "Never ever screw up...EVER", 5, 10);
+  const requests = [feat1, feat2, feat3, feat4];
 
 
-  const failEveryTimeObs = any => {
-    return new BehaviorSubject<any>(null);
+  const singleFeature = any => {
+    return from(requests);
   }
-  
+
+  const featuresArray = any => {
+     return of(requests).pipe(
+      map(x => x)
+     );
+  }
+
 
   beforeEach(() => TestBed.configureTestingModule({}));
 
@@ -25,23 +32,21 @@ describe('FeatureRequestServiceService', () => {
     expect(service).toBeTruthy();
   });
 
-  //replace 'failEveryTimeObs with correct operator
+  //(Solution: operator is 'from')
   it('should NOT USE THE SERVICE and use some rxjs operator to create an observable that emits a single value for each feature element in an array', async(() => {
     let i = 0;
 
-    failEveryTimeObs(requests).subscribe(request=>{
+    singleFeature(requests).subscribe(request => {
       expect(request.id).toBe(requests[i].id);
       i++;
     });
-
-    
   }));
 
-  //replace 'failEveryTimeObs with correct operator
-  it('should NOT USE THE SERVICE and use some rxjs operator to create an observable that emits an array of values matching the array', async(() => {    
+  //(Solution: operator is 'of- creates observable stream and then map combines to create an array')
+  it('should NOT USE THE SERVICE and use some rxjs operator to create an observable that emits an array of values matching the array', async(() => {
 
-    failEveryTimeObs(requests).subscribe(r=>{      
-      expect(r).toBe(requests);      
+    featuresArray(requests).subscribe(r => {
+      expect(r).toBe(requests);
     });
 
   }));
@@ -50,7 +55,7 @@ describe('FeatureRequestServiceService', () => {
   it('should emit a value when a singular value is passed to the newRequest() method while already observing', () => {
     const service: FeatureRequestService = TestBed.get(FeatureRequestService);
 
-    service.getSubscribableNewRequests().subscribe(newRequest=>expect(newRequest).toBe(feat1));
+    service.getSubscribableNewRequests().subscribe(newRequest => expect(newRequest).toBe(feat1));
 
     service.newRequest(feat1);
   });
@@ -62,7 +67,7 @@ describe('FeatureRequestServiceService', () => {
 
     service.newRequests(requests);
 
-    service.getSubscribableWithLatestItem().subscribe(r=>expect(r).toBe(feat4));
+    service.getSubscribableWithLatestItem().subscribe(r => expect(r).toBe(feat4));
   });
 
 
@@ -72,16 +77,16 @@ describe('FeatureRequestServiceService', () => {
 
     service.newRequests(requests);
 
-    let newFeat = new FeatureRequest(500,"Special Sauce",6,3);
+    let newFeat = new FeatureRequest(500, "Special Sauce", 6, 3);
 
     let i = 1;
 
-    service.getSubscribableWithFullHistory().subscribe(feat=>{
-      if (i<4) {
+    service.getSubscribableWithFullHistory().subscribe(feat => {
+      if (i < 4) {
         expect(feat).toBe(requests[i]);
       } else {
         expect(feat).toBe(newFeat);
-      }      
+      }
       i++;
     });
 
