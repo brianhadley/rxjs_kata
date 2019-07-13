@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeatureRequestService } from './feature-request-service/feature-request.service';
+import { DeveloperService } from './developer-service/developer.service';
+import { ReleaserService } from './releaser-service/releaser.service';
 
 
 @NgModule({
@@ -8,6 +10,6 @@ import { FeatureRequestService } from './feature-request-service/feature-request
   imports: [
     CommonModule
   ],
-  providers: [FeatureRequestService]
+  providers: [FeatureRequestService, DeveloperService, ReleaserService]
 })
 export class ServicesModule { }

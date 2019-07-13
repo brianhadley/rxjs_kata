@@ -5,7 +5,7 @@ import { FeatureRequest } from 'src/app/model/feature-request';
 import { of, from, Observable, BehaviorSubject } from 'rxjs';
 
 
-describe('FeatureRequestServiceService', () => {
+describe('FeatureRequestService', () => {
   const feat1 = new FeatureRequest(100,"Do most things really well",5,10);
   const feat2 = new FeatureRequest(200,"Do all things well",5,10);
   const feat3 = new FeatureRequest(300,"Do all things amazing",5,10);
