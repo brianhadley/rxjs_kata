@@ -1,9 +1,35 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
     RXJS Kata
   </h1>
 </div>
-<h2>Goal: </h2>
-<p>goal tbd</p>
-<router-outlet></router-outlet>
+<!-- Feature Name: <input [(ngModel)]="request.featureName"/><br/>
+Complexity: <input [(ngModel)]="request.complexity"/><br/>
+Priority: <input [(ngModel)]="request.priority"/><br/> -->
+
+<!-- <button (click)="CreateNewRequest()">New Request</button> -->
+Automatically Add Requests: <input type='checkbox' [(ngModel)]="this.AutoAdd"/><br><br>
+<button (click)="CreateRandomRequest()">New Random Request</button><br><br>
+<br>
+<div *ngIf="observing == 'none'">Observing NOT In Progress</div>
+<div *ngIf="observing == 'rp'">Observing ReplaySubject In Progress</div>
+<div *ngIf="observing == 'bs'">Observing BehaviorSubject In Progress</div>
+<div *ngIf="observing == 's'">Observing Subject In Progress</div>
+<br>
+
+<button (click)="GetFullHistory()" [disabled]="disabled">Observe Replay Subject</button>
+<button (click)="GetLastItem()" [disabled]="disabled">Observe Behavior Subject</button>
+<button (click)="GetNewItem()" [disabled]="disabled">Observe Subject</button>
+
+<div class="lc">
+<h4>Stream:</h4>
+<div *ngFor="let r of requestStream.slice().reverse()">
+ID: <strong>{{r.id}}</strong> FeatureName: {{r.featureName}} Priority: {{r.priority}} Complexity: {{r.complexity}}
+</div>
+</div>
+<div class="rc">
+  <h4>Observed History</h4>
+  <div *ngFor="let o of ObservedHistory.slice().reverse()">
+  ID: <strong>{{o.id}}</strong> FeatureName: {{o.featureName}} Priority: {{o.priority}} Complexity: {{o.complexity}}
+  </div>
+</div>
