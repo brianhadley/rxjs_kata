@@ -12,9 +12,11 @@ export class AppComponent {
   public request: FeatureRequest = new FeatureRequest(null, null, null, null);
   public requestStream: FeatureRequest[] = [];
   public ObservedHistory: FeatureRequest[] = [];
-  public ReplaySubjectHistory: FeatureRequest[] = [];
-  public SubjectHistory: FeatureRequest[] = [];
-  public BehaviorSubjectHistory: FeatureRequest[] = [];
+  public StreamTimes: Date[] = [];
+  public ObservedTimes: Date[] = [];
+  // public ReplaySubjectHistory: FeatureRequest[] = [];
+  // public SubjectHistory: FeatureRequest[] = [];
+  // public BehaviorSubjectHistory: FeatureRequest[] = [];
   public AutoAdd: boolean = true;
   private RandomLibrary: string[] = [
     "Do many things",
@@ -33,9 +35,11 @@ export class AppComponent {
   public observing: string = "none";
   private removeableSubscriptions: Subscription = new Subscription(null);
   constructor(private _featureRequestSvc: FeatureRequestService) {
-    this._featureRequestSvc
-      .getSubscribableWithFullHistory()
-      .subscribe(x => this.requestStream.push(x));
+    this._featureRequestSvc.getSubscribableWithFullHistory().subscribe(x => {
+      var d = new Date();
+      this.StreamTimes.push(d);
+      this.requestStream.push(x);
+    });
     this.CreateNewEvery3Seconds();
   }
 
@@ -52,9 +56,11 @@ export class AppComponent {
     this.observing = "rp";
     this.disableButtons();
     this.removeableSubscriptions.add(
-      this._featureRequestSvc
-        .getSubscribableWithFullHistory()
-        .subscribe(x => this.ObservedHistory.push(x))
+      this._featureRequestSvc.getSubscribableWithFullHistory().subscribe(x => {
+        var d = new Date();
+        this.ObservedTimes.push(d);
+        this.ObservedHistory.push(x);
+      })
     );
   }
 
@@ -62,9 +68,11 @@ export class AppComponent {
     this.observing = "bs";
     this.disableButtons();
     this.removeableSubscriptions.add(
-      this._featureRequestSvc
-        .getSubscribableWithLatestItem()
-        .subscribe(x => this.ObservedHistory.push(x))
+      this._featureRequestSvc.getSubscribableWithLatestItem().subscribe(x => {
+        var d = new Date();
+        this.ObservedTimes.push(d);
+        this.ObservedHistory.push(x);
+      })
     );
   }
 
@@ -72,9 +80,11 @@ export class AppComponent {
     this.observing = "s";
     this.disableButtons();
     this.removeableSubscriptions.add(
-      this._featureRequestSvc
-        .getSubscribableNewRequests()
-        .subscribe(x => this.ObservedHistory.push(x))
+      this._featureRequestSvc.getSubscribableNewRequests().subscribe(x => {
+        var d = new Date();
+        this.ObservedTimes.push(d);
+        this.ObservedHistory.push(x);
+      })
     );
   }
 
