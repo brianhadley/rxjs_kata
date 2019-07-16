@@ -25,11 +25,13 @@ describe('FeatureRequestService', () => {
     expect(service).toBeTruthy();
   });
 
-  //replace 'failEveryTimeObs with correct operator
+  //kata test 1
+  //replace 'failEveryTimeObs with correct rxjs operator
   it('should NOT USE THE SERVICE and use some rxjs operator to create an observable that emits a single value for each feature element in an array', async(() => {
+
     let i = 0;
 
-    failEveryTimeObs(requests).subscribe(request=>{
+    from(requests).subscribe(request=>{
       expect(request.id).toBe(requests[i].id);
       i++;
     });
@@ -37,16 +39,18 @@ describe('FeatureRequestService', () => {
     
   }));
 
-  //replace 'failEveryTimeObs with correct operator
+  //kata test 2
+  //replace 'failEveryTimeObs with correct rxjs operator
   it('should NOT USE THE SERVICE and use some rxjs operator to create an observable that emits an array of values matching the array', async(() => {    
 
-    failEveryTimeObs(requests).subscribe(r=>{      
+    of(requests).subscribe(r=>{      
       expect(r).toBe(requests);      
     });
 
   }));
 
-  //Subject test
+
+  //kata test 3
   it('should emit a value when a singular value is passed to the newRequest() method while already observing', () => {
     const service: FeatureRequestService = TestBed.get(FeatureRequestService);
 
@@ -56,7 +60,7 @@ describe('FeatureRequestService', () => {
   });
 
 
-  //BehaviorSubject test
+  //kata test 4
   it('should emit the last value of an array of requests passed via the newRequests() method', () => {
     const service: FeatureRequestService = TestBed.get(FeatureRequestService);
 
@@ -66,7 +70,7 @@ describe('FeatureRequestService', () => {
   });
 
 
-  //Replay Subject Test
+  //kata test 5
   it('should emit the last 3 values that were passed to it via newRequests(), as well as a new singular value passed via newRequest()', () => {
     const service: FeatureRequestService = TestBed.get(FeatureRequestService);
 
@@ -76,7 +80,7 @@ describe('FeatureRequestService', () => {
 
     let i = 1;
 
-    service.getSubscribableWithFullHistory().subscribe(feat=>{
+    service.getSubscribableWithLastThree().subscribe(feat=>{
       if (i<4) {
         expect(feat).toBe(requests[i]);
       } else {
