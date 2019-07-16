@@ -5,7 +5,7 @@ import { Observable, Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class FeatureRequestService {
+export class FeatureRequestService {  
   
   constructor() { }
 
@@ -25,7 +25,7 @@ export class FeatureRequestService {
     return undefined;
   }  
 
-  getSubscribableWithFullHistory():Observable<FeatureRequest> {
+  getSubscribableWithLastThree():Observable<FeatureRequest> {
     return undefined;
   }
   
