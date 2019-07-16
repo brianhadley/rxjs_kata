@@ -31,7 +31,7 @@ describe('FeatureRequestService', () => {
 
     let i = 0;
 
-    from(requests).subscribe(request=>{
+    failEveryTimeObs(requests).subscribe(request=>{
       expect(request.id).toBe(requests[i].id);
       i++;
     });
@@ -43,7 +43,7 @@ describe('FeatureRequestService', () => {
   //replace 'failEveryTimeObs with correct rxjs operator
   it('should NOT USE THE SERVICE and use some rxjs operator to create an observable that emits an array of values matching the array', async(() => {    
 
-    of(requests).subscribe(r=>{      
+    failEveryTimeObs(requests).subscribe(r=>{      
       expect(r).toBe(requests);      
     });
 
