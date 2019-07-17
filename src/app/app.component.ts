@@ -35,7 +35,7 @@ export class AppComponent {
   public observing: string = "none";
   private removeableSubscriptions: Subscription = new Subscription(null);
   constructor(private _featureRequestSvc: FeatureRequestService) {
-    this._featureRequestSvc.getSubscribableWithFullHistory().subscribe(x => {
+    this._featureRequestSvc.getSubscribableWithLastThree().subscribe(x => {
       var d = new Date();
       this.StreamTimes.push(d);
       this.requestStream.push(x);
@@ -56,7 +56,7 @@ export class AppComponent {
     this.observing = "rp";
     this.disableButtons();
     this.removeableSubscriptions.add(
-      this._featureRequestSvc.getSubscribableWithFullHistory().subscribe(x => {
+      this._featureRequestSvc.getSubscribableWithLastThree().subscribe(x => {
         var d = new Date();
         this.ObservedTimes.push(d);
         this.ObservedHistory.push(x);

@@ -35,9 +35,12 @@ export class FeatureRequestService {
 
   getSubscribableWithLatestItem(): Observable<FeatureRequest> {
     return this.featureRequestBehaviorSubject;
+  
   }
 
-  getSubscribableWithFullHistory(): Observable<FeatureRequest> {
+  getSubscribableWithLastThree():Observable<FeatureRequest> {
+  //   return undefined;
+  // getSubscribableWithFullHistory(): Observable<FeatureRequest> {
     return this.featureRequestReplaySubject;
   }
 }
