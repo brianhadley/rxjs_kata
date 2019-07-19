@@ -1,0 +1,102 @@
+<h5>Observe Completed Requests</h5>
+<div>
+  A stream of request will be coming in whether you are observing or not.
+  Developers will work the requests till completion.
+</div>
+<ul>
+  <li>Observe completed requests in the order they are completed</li>
+  <li>Observe completed requests in the order they were requested</li>
+  <li>Observe the requests...</li>
+</ul>
+
+<button
+  mat-flat-button
+  color="primary"
+  (click)="observeCompleted()"
+  [disabled]="disabled"
+>
+  Observe in the order they are completed
+</button>
+<button
+  mat-flat-button
+  color="primary"
+  (click)="observeCompletedOrderRequested()"
+  [disabled]="requesteddisabled"
+>
+  Observe releaser requested features in the order they were requested
+</button>
+<button
+  mat-flat-button
+  color="primary"
+  (click)="observeCompleted()"
+  disabled="true"
+>
+  Observe release the highest priority item received so far first, then the next
+  priority item
+</button>
+
+<div fxLayout="row" fxLayoutGap="15px">
+  <div fxLayout="column" fxLayoutAlign="start">
+    <h4>Stream:</h4>
+    <div *ngFor="let r of requestStream.slice().reverse(); let i = index">
+      <span>
+        Time Observed:
+        <strong>{{
+          StreamTimes.slice().reverse()[i] | date: "mm:ss.SSS"
+        }}</strong></span
+      >
+      <br />
+      ID: <strong>{{ r.id }}</strong>
+      <small
+        >FeatureName: {{ r.featureName }} Priority: {{ r.priority }} Complexity:
+        {{ r.complexity }} {{ r.status }}</small
+      >
+      <!-- <button mat-flat-button color="warn" (click)="completeRequest(r)">Complete</button> -->
+    </div>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="start">
+    <h4>Completed - in Order Completed:</h4>
+    <div
+      *ngFor="
+        let r of ObservedCompletedInOrderCompleted.slice().reverse();
+        let i = index
+      "
+    >
+      <span>
+        Time Observed:
+        <strong>{{
+          ObservedCompletedInOrderCompletedTimes.slice().reverse()[i] | date: "mm:ss.SSS"
+        }}</strong></span
+      >
+      <br />
+      ID: <strong>{{ r.id }}</strong>
+      <small
+        >FeatureName: {{ r.featureName }} Priority: {{ r.priority }} Complexity:
+        {{ r.complexity }}</small
+      >
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start">
+    <h4>Completed - In order requested:</h4>
+    <div
+      *ngFor="
+        let r of ObservedCompletedInOrderRequested.slice().reverse();
+        let i = index
+      "
+    >
+      <span>
+        Time Observed:
+        <strong>{{
+          ObservedCompletedInOrderRequestedTimes.slice().reverse()[i] | date: "mm:ss.SSS"
+        }}</strong></span
+      >
+      <br />
+      ID: <strong>{{ r.id }}</strong>
+      <small
+        >FeatureName: {{ r.featureName }} Priority: {{ r.priority }} Complexity:
+        {{ r.complexity }}</small
+      >
+    </div>
+  </div>
+</div>

@@ -1,46 +1,23 @@
-<div style="text-align:center">
-  <h1>
+<div fxLayout="column" style="text-align:center">
+  <h1 class='title'>
     RXJS Kata
   </h1>
+  <p> request -> mature -> develop -> pr -> QA -> release</p>
 </div>
-<!-- Feature Name: <input [(ngModel)]="request.featureName"/><br/>
-Complexity: <input [(ngModel)]="request.complexity"/><br/>
-Priority: <input [(ngModel)]="request.priority"/><br/> -->
 
-<!-- <button (click)="CreateNewRequest()">New Request</button> -->
-Automatically Add Requests:
-<input type="checkbox" [(ngModel)]="this.AutoAdd" /><br /><br />
-<button (click)="CreateRandomRequest()">New Random Request</button><br /><br />
-<br />
-<div *ngIf="observing == 'none'">Observing NOT In Progress</div>
-<div *ngIf="observing == 'rp'">Observing ReplaySubject In Progress</div>
-<div *ngIf="observing == 'bs'">Observing BehaviorSubject In Progress</div>
-<div *ngIf="observing == 's'">Observing Subject In Progress</div>
-<br />
-
-<button (click)="GetFullHistory()" [disabled]="disabled">
-  Observe Replay Subject
-</button>
-<button (click)="GetLastItem()" [disabled]="disabled">
-  Observe Behavior Subject
-</button>
-<button (click)="GetNewItem()" [disabled]="disabled">Observe Subject</button>
-
-<div class="lc">
-  <h4>Stream:</h4>
-  <div *ngFor="let r of requestStream.slice().reverse(); let i = index">
-    <span>Time Obseved: <strong>{{ StreamTimes.slice().reverse()[i] | date: 'mm:ss.SSS' }}</strong></span> <br />
-    ID: <strong>{{ r.id }}</strong> 
-    <!-- FeatureName: {{ r.featureName }} Priority:
-    {{ r.priority }} Complexity: {{ r.complexity }} -->
-  </div>
+<div *ngIf="this.requestStream.length < 20">
+  <mat-checkbox class="margin" [(ngModel)]="this.AutoAdd">Automatically Add Requests</mat-checkbox>
 </div>
-<div class="rc">
-  <h4>Observed History</h4>
-  <div *ngFor="let o of ObservedHistory.slice().reverse(); let i = index">
-    <span>Time Obseved: <strong>{{ ObservedTimes.slice().reverse()[i] | date: 'hh:mm:ss.SSS' }}</strong></span> <br />
-    ID: <strong>{{ o.id }}</strong>
-     <!-- FeatureName: {{ o.featureName }} Priority:
-    {{ o.priority }} Complexity: {{ o.complexity }} -->
-  </div>
+
+<button mat-flat-button color="accent" (click)="CreateRandomRequest()">New Random Request</button><br /><br />
+
+<div id="wrapper" fxFill>
+<mat-tab-group id="tab-group" class='tabs'>
+  <mat-tab label="1 - Subjects"> 
+    <app-level-one></app-level-one></mat-tab>
+  <mat-tab label="2 - Merging"> 
+    <app-level-two></app-level-two> </mat-tab>
+  <mat-tab label="3 - Advanced"> 
+    <app-level-three></app-level-three> </mat-tab>
+</mat-tab-group>
 </div>

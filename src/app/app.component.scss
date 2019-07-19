@@ -1,11 +1,21 @@
-.rc{
-    width:45%;
-    left:50%;
-    position: absolute;
+.title{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:darkgrey;
 }
 
-.lc{
-    width:48%;
-    position: absolute;
-    left:0;    
+.tabs{
+    height: 100%;
 }
+
+#wrapper{
+    padding: 16px; 
+    min-height: 100%; 
+    height: 100%; 
+    box-sizing: border-box;/*new*/
+  }
+
+  :host{
+    box-sizing: border-box;
+    display: block;
+    height: 100%;
+  }
