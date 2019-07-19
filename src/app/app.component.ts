@@ -22,18 +22,21 @@ export class AppComponent {
     "BUG-when using a scroll wheel the page shutters violently"
   ];
   public AutoAdd: boolean = true;
-  public requestStream: FeatureRequest[] = [];
+  public streamLength: number = 0;
 
   constructor(private _featureRequestSvc: FeatureRequestService) {
-    this.CreateNewEvery3Seconds();
+    this.CreateNewEvery5Seconds();
   }
-  CreateNewEvery3Seconds() {
+  CreateNewEvery5Seconds() {
     setTimeout(() => {
-      if (this.AutoAdd && this.requestStream.length < 20) {
+      if (this.AutoAdd && this.streamLength < 20) {
         this.CreateRandomRequest();
       }
-      this.CreateNewEvery3Seconds();
-    }, 3000);
+      else{
+        this.AutoAdd = false;
+      }
+      this.CreateNewEvery5Seconds();
+    }, 5000);
   }
 
   CreateRandomRequest() {
@@ -43,6 +46,7 @@ export class AppComponent {
       Math.floor(Math.random() * 24),
       Math.floor(Math.random() * 5)
     );
+    this.streamLength = this.streamLength + 1;
     this._featureRequestSvc.newRequest(feat1);
   }
 }

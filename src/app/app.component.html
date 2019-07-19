@@ -5,7 +5,7 @@
   <p> request -> mature -> develop -> pr -> QA -> release</p>
 </div>
 
-<div *ngIf="this.requestStream.length < 20">
+<div *ngIf="this.streamLength < 20">
   <mat-checkbox class="margin" [(ngModel)]="this.AutoAdd">Automatically Add Requests</mat-checkbox>
 </div>
 
