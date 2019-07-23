@@ -30,23 +30,18 @@ describe('FeatureRequestService', () => {
   it('should NOT USE THE SERVICE and use some rxjs operator to create an observable that emits a single value for each feature element in an array', async(() => {
 
     let i = 0;
-
-    failEveryTimeObs(requests).subscribe(request=>{
+    from(requests).subscribe(request=>{
       expect(request.id).toBe(requests[i].id);
       i++;
     });
-
-    
   }));
 
   //kata test 2
   //replace 'failEveryTimeObs with correct rxjs operator
   it('should NOT USE THE SERVICE and use some rxjs operator to create an observable that emits an array of values matching the array', async(() => {    
-
-    failEveryTimeObs(requests).subscribe(r=>{      
+    of(requests).subscribe(r=>{      
       expect(r).toBe(requests);      
     });
-
   }));
 
 
@@ -80,6 +75,8 @@ describe('FeatureRequestService', () => {
 
     let i = 1;
 
+    // service.getSubscribableWithFullHistory().subscribe(feat=>{
+    //   console.log('NEW:',feat);
     service.getSubscribableWithLastThree().subscribe(feat=>{
       if (i<4) {
         expect(feat).toBe(requests[i]);

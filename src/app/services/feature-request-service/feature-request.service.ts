@@ -1,33 +1,33 @@
-import { Injectable } from '@angular/core';
-import { FeatureRequest } from 'src/app/model/feature-request';
-import { Observable, Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { FeatureRequest } from "src/app/model/feature-request";
+import { Observable, Subject, BehaviorSubject, ReplaySubject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-export class FeatureRequestService {  
+export class FeatureRequestService {
   
-  constructor() { }
+  constructor() {}
 
-  newRequest(feature:FeatureRequest) {
+  newRequest(feature: FeatureRequest) {
     
   }
 
-  newRequests(features:FeatureRequest[]){
-    
+  newRequests(features: FeatureRequest[]) {
+    features.forEach(feature => {
+      this.newRequest(feature);
+    });
   }
-  
-  getSubscribableNewRequests():Observable<FeatureRequest> {    
+
+  getSubscribableNewRequests(): Observable<FeatureRequest> {
     return undefined;
   }
 
-  getSubscribableWithLatestItem():Observable<FeatureRequest> {
-    return undefined;
-  }  
-
-  getSubscribableWithLastThree():Observable<FeatureRequest> {
+  getSubscribableWithLatestItem(): Observable<FeatureRequest> {
     return undefined;
   }
-  
 
+  getSubscribableWithLastThree(): Observable<FeatureRequest> {
+    return undefined;
+  }
 }

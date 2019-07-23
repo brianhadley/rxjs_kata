@@ -25,7 +25,7 @@ describe('FeatureReportService', () => {
 
 
   //kata test 9
-  it('should provide an accurate report summary object based on the features received (priority > 10 is urgent, complexity >= 7 is highly complex', ()=>{
+  xit('should provide an accurate report summary object based on the features received (priority > 10 is urgent, complexity >= 7 is highly complex', ()=>{
     const service: FeatureReportService = TestBed.get(FeatureReportService);
     const featureRequestService: FeatureRequestService = TestBed.get(FeatureRequestService);
 

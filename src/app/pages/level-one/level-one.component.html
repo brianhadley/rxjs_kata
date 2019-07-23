@@ -1,0 +1,62 @@
+<h5>Observe Incoming Requests</h5>
+<div>
+<div id="info">
+  A stream of request will be coming in whether you are observing or not. On
+  initiation of the observing the stream - observe the requests using 3
+  different types of subjects.
+</div>
+<ul>
+  <li>Observe any new request request</li>
+  <li>Observe the last request and then latest</li>
+  <li>Observe the last 3 requests and then latest</li>
+</ul>
+</div>
+
+
+<div class="red" *ngIf="observing == 'none'">Observing NOT In Progress</div>
+<div class="green" *ngIf="observing != 'none'">
+  Observing  In Progress
+</div>
+
+<button mat-flat-button color="primary" (click)="GetFullHistory()" [disabled]="disabled">
+  Observe latest 3 then current
+</button>
+<button mat-flat-button color="primary" (click)="GetLastItem()" [disabled]="disabled">
+  Observe last then current
+</button>
+<button mat-flat-button color="primary" (click)="GetNewItem()" [disabled]="disabled">
+  Observe next new one then current
+</button>
+
+<div class="lc">
+  <h4>Stream:</h4>
+  <div *ngFor="let r of requestStream.slice().reverse(); let i = index">
+    <span> Time Observed:
+      <strong>{{
+        StreamTimes.slice().reverse()[i] | date: "mm:ss.SSS"
+      }}</strong></span
+    >
+    <br />
+    ID: <strong>{{ r.id }}</strong>
+    <small
+      >FeatureName: {{ r.featureName }} Priority: {{ r.priority }} Complexity:
+      {{ r.complexity }}</small
+    >
+  </div>
+</div>
+<div class="rc">
+  <h4>Observed History</h4>
+  <div *ngFor="let o of ObservedHistory.slice().reverse(); let i = index">
+    <span> Time Observed:
+      <strong>{{
+        ObservedTimes.slice().reverse()[i] | date: "mm:ss.SSS"
+      }}</strong></span
+    >
+    <br />
+    ID: <strong>{{ o.id }}</strong>
+    <small
+      >FeatureName: {{ o.featureName }} Priority: {{ o.priority }} Complexity:
+      {{ o.complexity }}</small
+    >
+  </div>
+</div>

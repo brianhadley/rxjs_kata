@@ -9,7 +9,6 @@ import { ReleaserService } from './releaser.service';
 
 
 describe('ReleaserService', () => {
-
     const feat1 = new FeatureRequest(100,"Do most things really well",8,6);
     const feat2 = new FeatureRequest(200,"Do all things well",2,3);
     const feat3 = new FeatureRequest(300,"Do all things amazing",7,8);
