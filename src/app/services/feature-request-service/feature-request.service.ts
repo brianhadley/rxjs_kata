@@ -6,26 +6,16 @@ import { Observable, Subject, BehaviorSubject, ReplaySubject } from "rxjs";
   providedIn: "root"
 })
 export class FeatureRequestService {
-  private featureRequestSubject: Subject<FeatureRequest> = new Subject();
-  private featureRequestBehaviorSubject: BehaviorSubject<
-    FeatureRequest
-  > = new BehaviorSubject(null);
-  private featureRequestReplaySubject: ReplaySubject<
-    FeatureRequest
-  > = new ReplaySubject<FeatureRequest>(3);
+  
   constructor() {}
 
   newRequest(feature: FeatureRequest) {
-    this.featureRequestSubject.next(feature);
-    this.featureRequestBehaviorSubject.next(feature);
-    this.featureRequestReplaySubject.next(feature);
+    
   }
 
   newRequests(features: FeatureRequest[]) {
     features.forEach(feature => {
-      this.featureRequestSubject.next(feature);
-      this.featureRequestBehaviorSubject.next(feature);
-      this.featureRequestReplaySubject.next(feature);
+      this.newRequest(feature);
     });
   }
 
