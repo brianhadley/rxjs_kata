@@ -1,23 +1,26 @@
 <div fxLayout="column" style="text-align:center">
-  <h1 class='title'>
+  <h1 class="title">
     RXJS Kata
   </h1>
-  <p> request -> mature -> develop -> pr -> QA -> release</p>
+  <p>request -> mature -> develop -> pr -> QA -> release</p>
 </div>
 
 <div *ngIf="this.streamLength < 20">
-  <mat-checkbox class="margin" [(ngModel)]="this.AutoAdd">Automatically Add Requests</mat-checkbox>
+  <mat-checkbox class="margin" [(ngModel)]="this.AutoAdd"
+    >Automatically Add Requests</mat-checkbox
+  >
 </div>
 
-<button mat-flat-button color="accent" (click)="CreateRandomRequest()">New Random Request</button><br /><br />
+<button mat-flat-button color="accent" (click)="CreateRandomRequest()">
+  New Random Request</button
+><br /><br />
 
 <div id="wrapper" fxFill>
-<mat-tab-group id="tab-group" class='tabs'>
-  <mat-tab label="1 - Subjects"> 
-    <app-level-one></app-level-one></mat-tab>
-  <mat-tab label="2 - Merging"> 
-    <app-level-two></app-level-two> </mat-tab>
-  <mat-tab label="3 - Advanced"> 
-    <app-level-three></app-level-three> </mat-tab>
-</mat-tab-group>
+  <mat-tab-group id="tab-group" class="tabs">
+    <mat-tab label="1 - Subjects"> <app-level-one></app-level-one></mat-tab>
+    <mat-tab label="2 - Merging"> <app-level-two></app-level-two> </mat-tab>
+    <mat-tab label="3 - Advanced">
+      <app-level-three></app-level-three>
+    </mat-tab>
+  </mat-tab-group>
 </div>

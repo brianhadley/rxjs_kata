@@ -28,16 +28,11 @@ export class ReleaserService {
 
   releaseAsCompleted(): Observable<FeatureRequest> {
     //output latest completed
-    return this._featureRequestService
-      .getSubscribableNewRequests()
-      .pipe(mergeMap(x => this._developerService.workFeatureRequest(x)));
+    return undefined;
   }
 
   releaseInOrderRequested(): Observable<FeatureRequest> {
-
-       return this._featureRequestService
-    .getSubscribableNewRequests()
-    .pipe(concatMap(x => this._developerService.workFeatureRequest(x)));
+    return undefined;
   }
 
   flakyManagerReleaseStrategy(): Observable<FeatureRequest> {

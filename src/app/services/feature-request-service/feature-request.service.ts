@@ -30,17 +30,14 @@ export class FeatureRequestService {
   }
 
   getSubscribableNewRequests(): Observable<FeatureRequest> {
-    return this.featureRequestSubject.pipe();
+    return undefined;
   }
 
   getSubscribableWithLatestItem(): Observable<FeatureRequest> {
-    return this.featureRequestBehaviorSubject;
-  
+    return undefined;
   }
 
-  getSubscribableWithLastThree():Observable<FeatureRequest> {
-  //   return undefined;
-  // getSubscribableWithFullHistory(): Observable<FeatureRequest> {
-    return this.featureRequestReplaySubject;
+  getSubscribableWithLastThree(): Observable<FeatureRequest> {
+    return undefined;
   }
 }

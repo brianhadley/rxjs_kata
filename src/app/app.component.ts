@@ -31,8 +31,7 @@ export class AppComponent {
     setTimeout(() => {
       if (this.AutoAdd && this.streamLength < 20) {
         this.CreateRandomRequest();
-      }
-      else{
+      } else {
         this.AutoAdd = false;
       }
       this.CreateNewEvery5Seconds();
